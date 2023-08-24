@@ -17,13 +17,13 @@ function App() {
       <Counter
         label="Step"
         initialNumber={1}
-        multiplier={1}
+        steps={1}
         setNumber={changeSteps}
       />
       <Counter
         label="Count"
         initialNumber={0}
-        multiplier={step}
+        steps={step}
         setNumber={changeCount}
       />
       <Message count={count} />
@@ -45,18 +45,18 @@ function Message({ count }) {
   return <div>{message}</div>;
 }
 
-function Counter({ label, initialNumber, multiplier, setNumber }) {
+function Counter({ label, initialNumber, steps, setNumber }) {
   console.log("init", initialNumber);
   const [value, setValue] = useState(initialNumber);
 
   setNumber(value);
 
   function decrease() {
-    setValue((v) => v - multiplier);
+    setValue((v) => v - steps);
   }
 
   function increase() {
-    setValue((v) => v + multiplier);
+    setValue((v) => v + steps);
   }
   return (
     <div className="box">
