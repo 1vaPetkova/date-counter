@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: calc(10px + 2vmin);
 }
 
 code {
@@ -32,6 +33,7 @@ code {
 .box {
   display: flex;
   justify-content: center;
+  padding: 15px;
   align-items: center;
   text-align: center;
 }
@@ -42,6 +44,17 @@ code {
   font-size: calc(10px + 2vmin);
 }
 
+.button {
+  flex-direction: column;
+  color: rgb(151, 101, 7);
+  font-size: calc(10px + 2vmin);
+}
+
 input[type="range"] {
-  appearance: slider-vertical;
+  appearance: slider-horizontal;
+  width: fit-content;
+}
+
+input[type="number"] {
+  font-size: calc(10px + 2vmin);
 }

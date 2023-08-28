@@ -12,25 +12,26 @@ function App() {
     setCount(value);
   }
 
+  function reset() {
+    setStep(1);
+    setCount(0);
+  }
+
   return (
     <div className="dates">
-      <Step setNumber={changeSteps} />
-      <Count
-        label="Count"
-        initialNumber={0}
-        steps={step}
-        setNumber={changeCount}
-      />
+      <Step step={step} setNumber={changeSteps} />
+      <Count count={count} steps={step} setNumber={changeCount} />
       <Message count={count} />
+      <p>
+        <button className="button" onClick={reset}>
+          Reset
+        </button>
+      </p>
     </div>
   );
 }
 
-function Step({ setNumber }) {
-  const [value, setValue] = useState(1);
-
-  setNumber(value);
-
+function Step({ step, setNumber }) {
   return (
     <div className="box">
       <input
@@ -38,42 +39,36 @@ function Step({ setNumber }) {
         min="1"
         max="10"
         step="1"
-        value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
+        value={step}
+        onChange={(e) => setNumber(Number(e.target.value))}
       ></input>
-      <label for="input">Step: {value}</label>
+      <label for="input">Step: {step}</label>
     </div>
   );
 }
 
-function Count({ initialNumber, steps, setNumber }) {
-  const [value, setValue] = useState(initialNumber);
-
-  function decrease() {
-    setValue((v) => v - steps);
-  }
-
-  function increase() {
-    setValue((v) => v + steps);
-  }
-
-  setNumber(value);
-
+function Count({ count, steps, setNumber }) {
   return (
     <div className="box">
-      <button className="button" onClick={decrease}>
+      <button
+        className="button"
+        onClick={() => setNumber(count - Number(steps))}
+      >
         -
       </button>
       <input
-        type="text"
+        type="number"
         step="1"
-        value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
+        value={count}
+        onChange={(e) => setNumber(Number(e.target.value))}
       ></input>
-      <button className="button" onClick={increase}>
+      <button
+        className="button"
+        onClick={() => setNumber(count + Number(steps))}
+      >
         +
       </button>
-      <label for="input">Count: {value}</label>
+      <label for="input">Count: {count}</label>
     </div>
   );
 }
