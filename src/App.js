@@ -23,9 +23,13 @@ function App() {
       <Count count={count} steps={step} setNumber={changeCount} />
       <Message count={count} />
       <p>
-        <button className="button" onClick={reset}>
-          Reset
-        </button>
+        {count !== 0 || step !== 1 ? (
+          <button className="button" onClick={reset}>
+            Reset
+          </button>
+        ) : (
+          <></>
+        )}
       </p>
     </div>
   );
