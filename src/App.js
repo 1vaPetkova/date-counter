@@ -14,19 +14,66 @@ function App() {
 
   return (
     <div className="dates">
-      <Counter
-        label="Step"
-        initialNumber={1}
-        steps={1}
-        setNumber={changeSteps}
-      />
-      <Counter
+      <Step setNumber={changeSteps} />
+      <Count
         label="Count"
         initialNumber={0}
         steps={step}
         setNumber={changeCount}
       />
       <Message count={count} />
+    </div>
+  );
+}
+
+function Step({ setNumber }) {
+  const [value, setValue] = useState(1);
+
+  setNumber(value);
+
+  return (
+    <div className="box">
+      <input
+        type="range"
+        min="1"
+        max="10"
+        step="1"
+        value={value}
+        onChange={(e) => setValue(Number(e.target.value))}
+      ></input>
+      <label for="input">Step: {value}</label>
+    </div>
+  );
+}
+
+function Count({ initialNumber, steps, setNumber }) {
+  const [value, setValue] = useState(initialNumber);
+
+  function decrease() {
+    setValue((v) => v - steps);
+  }
+
+  function increase() {
+    setValue((v) => v + steps);
+  }
+
+  setNumber(value);
+
+  return (
+    <div className="box">
+      <button className="button" onClick={decrease}>
+        -
+      </button>
+      <input
+        type="text"
+        step="1"
+        value={value}
+        onChange={(e) => setValue(Number(e.target.value))}
+      ></input>
+      <button className="button" onClick={increase}>
+        +
+      </button>
+      <label for="input">Count: {value}</label>
     </div>
   );
 }
@@ -43,34 +90,6 @@ function Message({ count }) {
     message = `${Math.abs(count)} ${daysStr} ago was ${d.toUTCString()}`;
   }
   return <div>{message}</div>;
-}
-
-function Counter({ label, initialNumber, steps, setNumber }) {
-  console.log("init", initialNumber);
-  const [value, setValue] = useState(initialNumber);
-
-  setNumber(value);
-
-  function decrease() {
-    setValue((v) => v - steps);
-  }
-
-  function increase() {
-    setValue((v) => v + steps);
-  }
-  return (
-    <div className="box">
-      <button className="button" onClick={decrease}>
-        -
-      </button>
-      <span className="label">
-        {label}: {value}
-      </span>
-      <button className="button" onClick={increase}>
-        +
-      </button>
-    </div>
-  );
 }
 
 export default App;

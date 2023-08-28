@@ -41,3 +41,7 @@ code {
   color: rgb(151, 101, 7);
   font-size: calc(10px + 2vmin);
 }
+
+input[type="range"] {
+  appearance: slider-vertical;
+}
